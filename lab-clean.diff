@@ -1,0 +1,36 @@
+diff --git a/WORKSPACE b/WORKSPACE
+index a68334b..fb522a3 100644
+--- a/WORKSPACE
++++ b/WORKSPACE
+@@ -17,8 +17,8 @@ http_archive(
+ 
+ http_archive(
+     name = "com_google_absl",
+-    strip_prefix = "abseil-cpp-master",
+-    urls = ["https://github.com/abseil/abseil-cpp/archive/master.zip"],
++    strip_prefix = "abseil-cpp-20240116.2",
++    urls = ["https://github.com/abseil/abseil-cpp/archive/refs/tags/20240116.2.zip"],
+ )
+ 
+ http_archive(
+@@ -163,3 +163,20 @@ python_repo(
+     name = "python_system",
+     py_version = "PY3",
+ )
++
++http_archive(
++    name = "bazel_features",
++    sha256 = "a660027f5a87f13224ab54b8dc6e191693c554f2692fcca46e8e29ee7dabc43b",
++    strip_prefix = "bazel_features-1.30.0",
++    url = "https://github.com/bazel-contrib/bazel_features/releases/download/v1.30.0/bazel_features-v1.30.0.tar.gz",
++)
++load("@bazel_features//:deps.bzl", "bazel_features_deps")
++bazel_features_deps()
++http_archive(
++    name = "rules_cc",
++    sha256 = "a2fdfde2ab9b2176bd6a33afca14458039023edb1dd2e73e6823810809df4027",
++    strip_prefix = "rules_cc-0.2.14",
++    url = "https://github.com/bazelbuild/rules_cc/releases/download/0.2.14/rules_cc-0.2.14.tar.gz",
++)
++load("@rules_cc//cc:extensions.bzl", "compatibility_proxy_repo")
++compatibility_proxy_repo()

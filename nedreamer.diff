@@ -1,0 +1,13 @@
+diff --git a/requirements.txt b/requirements.txt
+index 139fccf..76a6a70 100644
+--- a/requirements.txt
++++ b/requirements.txt
+@@ -1,7 +1,7 @@
+ torch==2.8.0
+ torchrl==0.9.2
+ tensordict==0.9.1
+-matplotlib==3.5.0
++matplotlib==3.8.4
+ ruamel.yaml==0.17.4
+ moviepy==1.0.3
+ einops==0.3.0
