@@ -74,9 +74,3 @@ Official setup instructions for both NE-Dreamer and DeepMind Lab were not direct
 
 ---
 
-## 7. torch.compile caveat from upstream issue #1
-- **Issue:** `corl-team/nedreamer#1`
-- **Claim:** `torch.compile` can break numerical stability in the TwoHot regression head and materially alter DMLab learning behavior
-- **Our local observation:** sanity and pilot runs completed successfully, but torch.compile recompilation warnings were observed during training
-- **Interpretation:** local execution is valid, but scientific conclusions should remain provisional until compile-sensitive behavior is checked explicitly
-- **Type:** Upstream validity risk
