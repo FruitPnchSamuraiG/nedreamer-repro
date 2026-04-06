@@ -14,15 +14,17 @@ Reproduce the empirical results of the NE-Dreamer paper, focusing first on the D
 - DeepMind Lab built from source with compatibility patches
 - NE-Dreamer environment installed
 - DMLab smoke test passed on `rooms_collect_good_objects_train`
-- Short sanity training runs passed for both `ne_dreamer` and `r2dreamer`
-- A 120k-step pilot run completed successfully on one DMLab Rooms task
-- Long-run two-model comparison on one task is in progress / pending analysis
+- Short sanity training runs passed for `ne_dreamer`, `r2dreamer`, `w/o shift`, and `w/o transformer`
+- 120k-step pilot run completed
+- C1 constrained pilot completed on one task: NE-Dreamer vs R2Dreamer, 10M steps, seed 0
+- C2 constrained pilot in progress on one task: full NE-Dreamer reused as reference, plus w/o transformer and w/o shift
 
 ## What Is Reproduced So Far
 - Setup reproducibility
 - Environment/runtime reproducibility
 - End-to-end training launch reproducibility
 - Short-run training reproducibility on DMLab Rooms
+- C1 constrained one-task comparison completed
 
 ## What Is Not Yet Reproduced
 - Full paper-level C1/C2 empirical reproduction
@@ -52,4 +54,4 @@ Upstream issue `corl-team/nedreamer#1` reports that `torch.compile` may introduc
 - `nedreamer.diff`, `lab-clean.diff`: local patches
 - `nedreamer-sha.txt`, `lab-clean-sha.txt`: exact source revisions
 - `pip-freeze-nedreamer.txt`, `gpu-info.txt`, `system-info.txt`: environment snapshots
-- `run_two_5k_rooms_test.sh`, `run_two_10m_rooms.sh`: run scripts
+- `run_two_5k_rooms_test.sh`, `run_two_10m_rooms.sh`, `run_two_10m_c2_rooms.sh`: run scripts

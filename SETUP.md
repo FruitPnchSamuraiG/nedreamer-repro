@@ -169,3 +169,18 @@ print("smoke_ok")
 PY
 ```
 Expected output: `smoke_ok`
+
+## Additional Steps After DMLab Wheel Install
+
+Rename MODULE.bazel files to disable bzlmod:
+```bash
+mv MODULE.bazel MODULE.bazel.off
+mv MODULE.bazel.lock MODULE.bazel.lock.off
+```
+
+Fix setuptools and numpy compatibility:
+```bash
+python -m pip install --force-reinstall "setuptools<81"
+python -m pip install --force-reinstall "numpy==1.23.5"
+python -c "import deepmind_lab; print(deepmind_lab.__file__)"
+```

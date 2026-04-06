@@ -74,3 +74,31 @@ Official setup instructions for both NE-Dreamer and DeepMind Lab were not direct
 
 ---
 
+
+---
+
+## 8. deepmind_lab import required older setuptools
+- **Error:** `ModuleNotFoundError: No module named 'pkg_resources'`
+- **Fix:** `python -m pip install --force-reinstall "setuptools<81"`
+- **Type:** Environment / packaging compatibility issue
+
+---
+
+## 9. deepmind_lab import failed with NumPy 2.x
+- **Error:** `ImportError: numpy.core.multiarray failed to import`
+- **Fix:** `python -m pip install --force-reinstall "numpy==1.23.5"`
+- **Type:** Environment / binary compatibility issue
+
+---
+
+## 10. w/o transformer ablation not directly exposed in public config
+- **Error:** setting `model.ne_dreamer.num_layers=0` crashed with `IndexError: index 0 is out of range`
+- **Fix:** patched `networks.py` so `num_layers==0` skips transformer execution and uses a no-transformer fallback path
+- **Type:** Upstream reproducibility gap / local ablation patch
+
+---
+
+## 11. w/o shift ablation mapping
+- **Implementation:** `model.ne_dreamer.use_same=True`, `model.ne_dreamer.use_next=False`
+- **Interpretation:** removes next-step target shift and predicts same-step embeddings instead
+- **Type:** Local reconstruction from public code + paper description

@@ -4,31 +4,45 @@
 
 ### 1. DMLab smoke test
 - Task: `dmlab_rooms_collect_good_objects_train`
-- Result: environment reset succeeded, random-action stepping succeeded, no level-loading failure, `smoke_ok` observed
+- Result: environment reset, stepping, and level loading all succeeded. `smoke_ok` observed.
 
-### 2. Short sanity training run
+### 2. Short sanity training runs
 - Task: `dmlab_rooms_collect_good_objects_train`
-- Models: `ne_dreamer`, `r2dreamer`
-- Result: both models launched, produced W&B runs, created logdirs, completed without crashing
+- Models: `ne_dreamer`, `r2dreamer`, `w/o shift`, `w/o transformer`
+- Result: all launched, produced W&B runs, created logdirs, completed without crashing
 
 ### 3. 120k-step pilot run
 - Task: `dmlab_rooms_collect_good_objects_train`
 - Model: `ne_dreamer`
-- Result: completed successfully, evaluation and training metrics logged
-- Note: validates end-to-end execution, not paper-level performance reproduction
+- Result: completed successfully, metrics logged to W&B
 - W&B: https://wandb.ai/NE-Dreamer/nedreamer/runs/yu5ycbj0
 
-## Pending / In Progress
-
-### Two-model long comparison
+### 4. C1 constrained pilot — one task, two models
 - Task: `dmlab_rooms_collect_good_objects_train`
 - Models: `ne_dreamer`, `r2dreamer`
 - Seed: `0`
 - Budget: `10M` steps each
-- Purpose: first constrained C1-style comparison on one shared GPU
+- Status: completed
+- Note: qualitative trend appears similar to the paper on this task, pending careful analysis
+
+## Pending / In Progress
+
+### 5. C2 constrained pilot — one task, ablations
+- Task: `dmlab_rooms_collect_good_objects_train`
+- Models:
+  - full `ne_dreamer` (reused from C1)
+  - `w/o transformer` (`num_layers=0`, local patch required)
+  - `w/o shift` (`use_same=True`, `use_next=False`)
+- Seed: `0`
+- Budget: `10M` steps each
+- Status: in progress
+
+## Ablation Implementation Notes
+- `w/o shift` maps to `model.ne_dreamer.use_same=True` and `model.ne_dreamer.use_next=False`
+- `w/o transformer` required a local patch to `networks.py` — the public repo does not expose this ablation directly via config. Setting `num_layers=0` originally crashed; patch adds a no-transformer fallback path.
 
 ## How To Interpret Current Results
-Current results show: setup works, DMLab works, NE-Dreamer training loop works, baseline training loop works.
+Current results show: setup works, DMLab works, training loop works for all models, C1 one-task comparison completed.
 Current results do not yet show: paper-level reproduction, multi-seed robustness, or final comparative conclusions.
 
 ## Caveat
