@@ -33,8 +33,6 @@ Reproduce the empirical results of the NE-Dreamer paper, focusing first on the D
 
 ## Constraints
 - Single shared GPU: physical GPU 1 only
-- GPU 0 reserved for another user
-- No initial sudo access; PI had to create `/mnt/data-hdd/hriday` and install required system packages
 - Full C1 + C2 as reported in the paper is too large for a first pass on one shared GPU
 
 ## Current Verdict

@@ -47,33 +47,12 @@ Machine: 7950x-4090-ws, Ubuntu 24.04, Python 3.11, Bazel 7.4.1
 
 ---
 
-## Summary Table
-
-| # | Error | Fix | Type |
-|---|-------|-----|------|
-| 1 | matplotlib 3.5.0 fails on Python 3.11 | Pin to 3.8.4 | Upstream deviation |
-| 2 | Bazel 9 too new | Downgrade to 7.4.1 | Environment |
-| 3 | bzlmod conflicts with WORKSPACE | Disable bzlmod | Environment |
-| 4 | rules_cc missing | Add to WORKSPACE | Upstream deviation |
-| 5 | abseil-cpp master too new | Pin to 20240116.2 | Upstream deviation |
-| 6 | No data directory or sudo | Asked PI | Environment |
-
----
-
-## Verdict
-Official setup instructions for both NE-Dreamer and DeepMind Lab were not directly reproducible on Ubuntu 24.04 with current tooling. Four upstream dependency issues required explicit fixes. These are worth noting as part of the reproducibility story.
-
----
-
 ## 7. torch.compile caveat from upstream issue #1
 - **Issue:** `corl-team/nedreamer#1`
 - **Claim:** `torch.compile` can break numerical stability in the TwoHot regression head and materially alter DMLab learning behavior
 - **Our local observation:** sanity and pilot runs completed successfully, but torch.compile recompilation warnings were observed during training
 - **Interpretation:** local execution is valid, but scientific conclusions should remain provisional until compile-sensitive behavior is checked explicitly
 - **Type:** Upstream validity risk
-
----
-
 
 ---
 
